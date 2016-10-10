@@ -18,7 +18,7 @@ SalesGraph SalesGraph::FromStream(std::istream& in) {
     for (int vertex2 = 0; vertex2 < num_of_vert; vertex2++) {
       if (vertex1 != vertex2) {
         double temp = 0;
-        std::cin >> temp;
+        in >> temp;
         graph.vertices_matrix[vertex1][vertex2] = temp;
       } else
         graph.vertices_matrix[vertex1][vertex2] = 1;
