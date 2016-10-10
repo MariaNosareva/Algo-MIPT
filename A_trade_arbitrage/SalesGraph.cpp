@@ -13,7 +13,6 @@ SalesGraph SalesGraph::FromStream(std::istream& in) {
   unsigned long num_of_vert;
   in >> num_of_vert;
   SalesGraph graph(num_of_vert);
-  graph.number_of_vertices = num_of_vert;
   for (int vertex1 = 0; vertex1 < num_of_vert; vertex1++) {
     for (int vertex2 = 0; vertex2 < num_of_vert; vertex2++) {
       if (vertex1 != vertex2) {
