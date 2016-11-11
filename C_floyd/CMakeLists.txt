@@ -3,5 +3,11 @@ project(floyd)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp GraphForFloyd.cpp GraphForFloyd.h)
-add_executable(floyd ${SOURCE_FILES})
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+set(BUILD_GTEST ON)
+
+
+add_subdirectory(Tests)
+add_subdirectory(Main)
+add_subdirectory(GraphLib)

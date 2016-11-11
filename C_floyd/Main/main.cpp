@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "GraphForFloyd.h"
+#include "../GraphLib/GraphForFloyd.h"
 
 int main() {
   std::ifstream in("floyd.in");
