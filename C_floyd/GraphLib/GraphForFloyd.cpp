@@ -6,8 +6,10 @@
 
 GraphForFloyd::GraphForFloyd(unsigned long number_of_vertices_ = 0):
     number_of_vertices(number_of_vertices_),
-    vertices_matrix(number_of_vertices_, std::vector<int>(number_of_vertices_)),
-    shortest_paths(number_of_vertices_, std::vector<int>(number_of_vertices_)) {}
+    vertices_matrix(number_of_vertices_, std::move(std::vector<int>(number_of_vertices_))),
+    shortest_paths(number_of_vertices_, std::move(std::vector<int>(number_of_vertices_))) {}
+
+GraphForFloyd::GraphForFloyd() {}
 
 GraphForFloyd GraphForFloyd::FromStream(std::istream& in) {
   unsigned long num_of_vert;
@@ -33,10 +35,22 @@ void GraphForFloyd::Floyd(){
                                                         shortest_paths[some_vertex][vertex2]);
 }
 
-void GraphForFloyd::PrintShortestPathsMatrix(std::ofstream &fout) {
+void GraphForFloyd::PrintShortestPathsMatrix(std::ostream &fout) {
   for (int vertex1 = 0; vertex1 < number_of_vertices; vertex1++) {
     for (int vertex2 = 0; vertex2 < number_of_vertices; vertex2++)
       fout << shortest_paths[vertex1][vertex2] << " ";
     fout << std::endl;
   }
+}
+
+std::vector<std::vector<int>> GraphForFloyd::GetMatrix() {
+  return vertices_matrix;
+}
+
+std::vector<std::vector<int>> GraphForFloyd::GetFloydMatrix() {
+  return shortest_paths;
+}
+
+int GraphForFloyd::GetSize() {
+  return (int) number_of_vertices;
 }

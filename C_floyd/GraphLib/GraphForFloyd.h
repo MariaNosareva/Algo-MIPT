@@ -18,8 +18,12 @@ class GraphForFloyd{
  public:
   static GraphForFloyd FromStream(std::istream&);
   GraphForFloyd(unsigned long);
+  GraphForFloyd();
   void Floyd();
-  void PrintShortestPathsMatrix(std::ofstream &);
+  void PrintShortestPathsMatrix(std::ostream &);
+  std::vector<std::vector<int>> GetMatrix();
+  std::vector<std::vector<int>> GetFloydMatrix();
+  int GetSize();
 };
 
 #endif //FLOYD_GRAPH_FOR_FLOYD_H
