@@ -5,18 +5,20 @@
 #include "Field.h"
 
 Field::Field(int field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
-    layout(layout_), field_size(field_s), parent(parent_), pr_function(0), move(' '), steps_from_start(0) {
-  for (int i = 0; i < field_size * field_size; i++)
+
+    Field::Field(unsigned long field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
+layout(layout_), field_size(field_s), parent(parent_), pr_function(0), move(' '), steps_from_start(0) {
+  for (unsigned long i = 0; i < field_size * field_size; i++)
     if (!layout[i]) {
       zero_position = i;
       break;
     }
 }
 
-int Field::hamming_heuristic() {
-  int answer = 0;
+unsigned long Field::hammingHeuristic() const {
+  unsigned long answer = 0;
   for (int i = 0; i < field_size * field_size; i++)
-     if ((layout[i] != i + 1) && (layout[i]))
+    if ((layout[i] != i + 1) && (layout[i]))
       answer++;
   return answer;
 }
@@ -32,11 +34,11 @@ bool Field::operator==(const Field& second) const {
 
 bool Field::operator<(const Field& another) const{
   return this->pr_function < another.pr_function || (this->pr_function == another.pr_function &&
-          this->layout < another.layout);
+      this->layout < another.layout);
 }
 
-bool Field::IsSolvable() {
-  int test = 0;
+bool Field::isSolvable() const {
+  unsigned long test = 0;
   for (int i = 0; i < field_size * field_size; i++)
     if (layout[i])
       for (int j = 0; j < i; j++)
@@ -53,29 +55,29 @@ bool Field::IsSolvable() {
   return test % 2 != 0;
 }
 
-bool Field::is_win_position() {
-  int hamming = hamming_heuristic();
+bool Field::isWinPosition() const {
+  unsigned long hamming = hammingHeuristic();
   return (hamming == 0);
 }
 
-void Field::set_parent(std::shared_ptr<Field> parent_) {
+void Field::setParent(std::shared_ptr<Field> parent_) {
   parent = parent_;
 }
 
-void Field::set_pr_function(int x) {
+void Field::setPrFunction(unsigned long x) {
   pr_function = x;
 }
 
 
-void Field::GetNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) {
-  int x_side, y_side;
+void Field::getNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) const {
+  unsigned long x_side, y_side;
   x_side = zero_position / field_size;
   y_side = zero_position % field_size;
 
   for (int i = -1; i < 2; i++) {
     for (int j = -1; j < 2; j++) {
-      int new_x_side = x_side + i;
-      int new_y_side = y_side + j;
+      unsigned long new_x_side = x_side + i;
+      unsigned long new_y_side = y_side + j;
 
       if ((new_x_side >= 0 && new_x_side < field_size) && (new_y_side >= 0 && new_y_side < field_size) &&
           ((i == 0 && (j == -1 || j == 1)) || (j == 0 && (i == -1 || i == 1)))) {
@@ -83,8 +85,8 @@ void Field::GetNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) {
         std::swap(new_layout[zero_position], new_layout[new_x_side * field_size + new_y_side]);
         std::shared_ptr<Field> new_field = std::make_shared<Field>(Field(field_size, new_layout));
         new_field->steps_from_start = steps_from_start + 1;
-        int new_pr_function = new_field->steps_from_start + new_field->hamming_heuristic();
-        new_field->set_pr_function(new_pr_function);
+        unsigned long new_pr_function = new_field->steps_from_start + new_field->hammingHeuristic();
+        new_field->setPrFunction(new_pr_function);
         if (i == 1)
           new_field->move = 'D';
         if (i == -1)
@@ -99,15 +101,15 @@ void Field::GetNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) {
   }
 }
 
-int Field::get_pr_function() {
+unsigned long Field::getPrFunction() const {
   return pr_function;
 }
 
-char Field::get_move() {
+char Field::getMove() const {
   return move;
 }
 
-std::shared_ptr<Field> Field::get_parent() {
+std::shared_ptr<Field> Field::getParent() const {
   return parent;
 }
 

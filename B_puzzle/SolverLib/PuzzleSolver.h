@@ -11,16 +11,18 @@
 #include <queue>
 #include <vector>
 
+
 class PuzzleSolver {
  private:
   int moves_to_solve;
   std::string solution;
   Field init_field;
+
  public:
-  PuzzleSolver(int, std::vector<int>&);
-  void SolveIt();
-  int get_moves();
-  std::string get_solution();
+  PuzzleSolver(unsigned long, std::vector<int>&);
+  void solveIt();
+  int getMoves();
+  std::string getSolution();
   int getSize();
 };
 

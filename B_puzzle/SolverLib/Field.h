@@ -11,26 +11,26 @@
 class Field {
  private:
   std::vector<int> layout;
-  int field_size;
+  unsigned long field_size;
   std::shared_ptr<Field> parent;
-  int zero_position;
-  int pr_function;
-  int steps_from_start;
+  unsigned long zero_position;
+  unsigned long pr_function;
+  unsigned long steps_from_start;
   char move;
 
  public:
-  Field(int, std::vector<int>&, std::shared_ptr<Field> = nullptr);
-  int hamming_heuristic();
+  Field(unsigned long, std::vector<int>&, std::shared_ptr<Field> = nullptr);
+  unsigned long hammingHeuristic() const;
   bool operator==(const Field&) const;
   bool operator<(const Field&) const;
-  bool IsSolvable();
-  bool is_win_position();
-  void set_parent(std::shared_ptr<Field>);
-  void set_pr_function(int);
-  void GetNeighbors(std::vector<std::shared_ptr<Field>> &);
-  int get_pr_function();
-  char get_move();
-  std::shared_ptr<Field> get_parent();
+  bool isSolvable()const;
+  bool isWinPosition() const;
+  void setParent(std::shared_ptr<Field>);
+  void setPrFunction(unsigned long);
+  void getNeighbors(std::vector<std::shared_ptr<Field>> &) const;
+  unsigned long getPrFunction() const;
+  char getMove()const;
+  std::shared_ptr<Field> getParent() const;
   int getSize();
 };
 
