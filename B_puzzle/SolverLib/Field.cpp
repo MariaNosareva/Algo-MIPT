@@ -4,10 +4,8 @@
 
 #include "Field.h"
 
-Field::Field(int field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
-
-    Field::Field(unsigned long field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
-layout(layout_), field_size(field_s), parent(parent_), pr_function(0), move(' '), steps_from_start(0) {
+Field::Field(unsigned long field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
+  layout(layout_), field_size(field_s), parent(parent_), pr_function(0), move(' '), steps_from_start(0) {
   for (unsigned long i = 0; i < field_size * field_size; i++)
     if (!layout[i]) {
       zero_position = i;
