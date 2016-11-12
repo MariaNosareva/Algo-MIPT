@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <queue>
+#include <vector>
 
 class PuzzleSolver {
  private:
@@ -20,6 +21,7 @@ class PuzzleSolver {
   void SolveIt();
   int get_moves();
   std::string get_solution();
+  int getSize();
 };
 
 #endif //PYATNASHKI_PUZZLE_SOLVER_H

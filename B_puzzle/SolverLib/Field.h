@@ -31,6 +31,7 @@ class Field {
   int get_pr_function();
   char get_move();
   std::shared_ptr<Field> get_parent();
+  int getSize();
 };
 
 #endif //PYATNASHKI_FIELD_H

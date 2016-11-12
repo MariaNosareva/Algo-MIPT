@@ -12,6 +12,7 @@ struct cmp{
   }
 };
 
+
 PuzzleSolver::PuzzleSolver(int field_s, std::vector<int>& layout_):
     init_field(field_s, layout_), moves_to_solve(0), solution("") {}
 
@@ -62,4 +63,8 @@ int PuzzleSolver::get_moves() {
 
 std::string PuzzleSolver::get_solution() {
   return solution;
+}
+
+int PuzzleSolver::getSize() {
+  return init_field.getSize();
 }

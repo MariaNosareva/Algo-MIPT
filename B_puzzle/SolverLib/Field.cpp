@@ -110,3 +110,7 @@ char Field::get_move() {
 std::shared_ptr<Field> Field::get_parent() {
   return parent;
 }
+
+int Field::getSize() {
+  return field_size;
+}

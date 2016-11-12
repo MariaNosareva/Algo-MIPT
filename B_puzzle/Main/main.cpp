@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "Field.h"
-#include "PuzzleSolver.h"
+#include "../SolverLib/Field.h"
+#include "../SolverLib/PuzzleSolver.h"
 
 int main() {
   unsigned long field_size = 3;
