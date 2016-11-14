@@ -3,5 +3,10 @@ project(trade_arbitrage)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp SalesGraph.cpp SalesGraph.h)
-add_executable(trade_arbitrage ${SOURCE_FILES})
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+set(BUILD_GTEST ON)
+
+add_subdirectory(Tests)
+add_subdirectory(Main)
+add_subdirectory(GraphLib)

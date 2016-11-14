@@ -18,6 +18,8 @@ class SalesGraph {
   bool NoCircleHere();
   bool ArbitrageExistence();
   static SalesGraph FromStream(std::istream&);
+  unsigned long getNumberOfVertices() const;
+  std::vector<std::vector<double>> getVerticesMatrix() const;
 };
 
 #endif //TRADE_ARBITRAGE_SALES_GRAPH_H

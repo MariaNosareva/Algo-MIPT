@@ -55,5 +55,11 @@ bool SalesGraph::NoCircleHere() {
 bool SalesGraph::ArbitrageExistence(){
   return !NoCircleHere();
 }
+unsigned long SalesGraph::getNumberOfVertices() const {
+  return number_of_vertices;
+}
+std::vector<std::vector<double>> SalesGraph::getVerticesMatrix() const {
+  return vertices_matrix;
+}
 
 

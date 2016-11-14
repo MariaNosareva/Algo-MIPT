@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "SalesGraph.h"
+#include "../GraphLib/SalesGraph.h"
 
 int main() {
   SalesGraph graph = SalesGraph::FromStream(std::cin);
