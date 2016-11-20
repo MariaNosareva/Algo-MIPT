@@ -8,12 +8,6 @@
 #include <vector>
 #include <fstream>
 
-struct Edge {
-  long from;
-  long to;
-  long capacity;
-  long flow;
-};
 
 class Network {
  private:
