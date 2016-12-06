@@ -4,15 +4,15 @@
 
 #include "SuffArray.h"
 
-SuffArray::SuffArray(): text(""), suffArray(0), LCP(0), textLen(0) {}
+SuffArray::SuffArray(): text(""), suffArray(0), lcpArray(0), textLen(0) {}
 
 SuffArray SuffArray::FromStream(std::istream& in) {
   SuffArray array;
   in >> array.text;
   array.text = array.text + '\0';
   array.textLen = (int)array.text.length();
-  array.suffArray.resize(array.text.length());
-  //TODO resize LCP
+  array.suffArray.resize(array.text.length() - 1);
+  array.lcpArray.resize(array.text.length() - 1);
 
   return array;
 }
@@ -73,6 +73,49 @@ std::vector<int> SuffArray::MakeSuffArray() {
 
     length *= 2;
   }
-  suffArray = suffIndices;
+  for (int index = 1; index < suffIndices.size(); index++) {
+    suffArray[index - 1] = suffIndices[index];
+  }
   return suffArray;
+}
+
+int SuffArray::ArraySize() {
+  return (int)suffArray.size();
+}
+
+std::vector<int> SuffArray::MakeLCP() {
+  MakeSuffArray();
+  std::vector<int> reversedSuffArray(text.length() - 1);
+  for (int index = 0; index < suffArray.size(); index++) {
+    reversedSuffArray[suffArray[index]] = index;
+  }
+
+  int lcpLength = 0;
+  for (int curSuffPos = 0; curSuffPos < text.length() - 1; curSuffPos++) {
+    if (lcpLength > 0) {
+      --lcpLength;
+    }
+    if (reversedSuffArray[curSuffPos] == text.length() - 2) {
+      lcpArray[text.length() - 2] = 0;
+      lcpLength = 0;
+    } else {
+      int nextSuffPos = suffArray[reversedSuffArray[curSuffPos] + 1];
+      while ((std::max(curSuffPos + lcpLength, nextSuffPos + lcpLength) < text.length() - 1) &&
+          text[curSuffPos + lcpLength] == text[nextSuffPos + lcpLength]) {
+        ++lcpLength;
+      }
+      lcpArray[reversedSuffArray[curSuffPos]] = lcpLength;
+    }
+  }
+  return lcpArray;
+}
+
+int SuffArray::NumberOfDifferentSubstrings() {
+  MakeLCP();
+  int str = (int)(((1 + (text.length() - 1)) * (text.length() - 1))/ 2 );
+  int sumLCPs = 0;
+  for (int i = 0; i < lcpArray.size(); i++) {
+    sumLCPs += lcpArray[i];
+  }
+  return str - sumLCPs;
 }

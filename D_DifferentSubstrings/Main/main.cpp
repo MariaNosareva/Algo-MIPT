@@ -6,9 +6,6 @@
 
 int main() {
   SuffArray array = SuffArray::FromStream(std::cin);
-  std::vector<int> suff = array.MakeSuffArray();
-  for (int i = 0; i < 7; i++) {
-    std::cout << suff[i] << ' ';
-  }
+  std::cout << array.NumberOfDifferentSubstrings() << std::endl;
   return 0;
 }

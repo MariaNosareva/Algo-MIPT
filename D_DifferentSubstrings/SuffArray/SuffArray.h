@@ -14,11 +14,14 @@ class SuffArray {
   std::string text;
   int textLen;
   std::vector<int> suffArray;
-  std::vector<int> LCP;
+  std::vector<int> lcpArray;
  public:
   SuffArray();
   static SuffArray FromStream(std::istream&);
   std::vector<int> MakeSuffArray();
+  int ArraySize();
+  std::vector<int> MakeLCP();
+  int NumberOfDifferentSubstrings();
 };
 
 #endif //PROJECT_SUFFARRAY_H
