@@ -7,7 +7,7 @@
 #include "PuzzleSolver.h"
 
 struct cmp{
-  bool operator()(std::shared_ptr<Field> a, std::shared_ptr<Field> b) {
+  bool operator()(Field* a, Field* b) {
     return (*b) < (*a);
   }
 };
@@ -22,14 +22,14 @@ void PuzzleSolver::solveIt() {
     return;
   }
 
-  std::priority_queue<std::shared_ptr<Field>, std::vector<std::shared_ptr<Field>>, cmp> queue;
-  queue.push(std::make_shared<Field>(init_field));
-  std::map<Field, int> map_for_search;
+  std::priority_queue<Field*, std::vector<Field*>, cmp> queue;
+  queue.push(&init_field);
+  std::map<std::unique_ptr<Field>, int> map_for_search;
   unsigned long hamm_h = init_field.hammingHeuristic();
   init_field.setPrFunction(hamm_h);
 
   while(!queue.empty()) {
-    std::shared_ptr<Field> cur_board = queue.top();
+    Field* cur_board = queue.top();
     queue.pop();
 
     if (cur_board->isWinPosition()) {
@@ -41,16 +41,16 @@ void PuzzleSolver::solveIt() {
       return;
     }
 
-    std::vector<std::shared_ptr<Field>> neighbors;
+    std::vector<std::unique_ptr<Field>> neighbors;
     cur_board->getNeighbors(neighbors);
     for (int item = 0; item < neighbors.size(); item++) {
       if ((cur_board->getParent() != nullptr) && *(neighbors[item]) == *(cur_board->getParent()))
         continue;
-      if (map_for_search.find(*(neighbors[item])) == map_for_search.end()) {
-        map_for_search.insert(map_for_search.begin(),
-                              std::make_pair(*(neighbors[item]), neighbors[item]->getPrFunction()));
+      if (map_for_search.find(neighbors[item]) == map_for_search.end()) {
         neighbors[item]->setParent(cur_board);
-        queue.push(neighbors[item]);
+        queue.push(neighbors[item].get());
+        map_for_search.insert(map_for_search.begin(),
+                              std::make_pair(std::move(neighbors[item]), neighbors[item]->getPrFunction()));
       }
     }
   }

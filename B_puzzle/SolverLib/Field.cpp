@@ -4,7 +4,7 @@
 
 #include "Field.h"
 
-Field::Field(unsigned long field_s, std::vector<int>& layout_, std::shared_ptr<Field> parent_):
+Field::Field(unsigned long field_s, std::vector<int>& layout_, Field* parent_):
   layout(layout_), field_size(field_s), parent(parent_), pr_function(0), move(' '), steps_from_start(0) {
   for (unsigned long i = 0; i < field_size * field_size; i++)
     if (!layout[i]) {
@@ -12,6 +12,7 @@ Field::Field(unsigned long field_s, std::vector<int>& layout_, std::shared_ptr<F
       break;
     }
 }
+
 
 unsigned long Field::hammingHeuristic() const {
   unsigned long answer = 0;
@@ -58,7 +59,7 @@ bool Field::isWinPosition() const {
   return (hamming == 0);
 }
 
-void Field::setParent(std::shared_ptr<Field> parent_) {
+void Field::setParent(Field* parent_) {
   parent = parent_;
 }
 
@@ -67,7 +68,7 @@ void Field::setPrFunction(unsigned long x) {
 }
 
 
-void Field::getNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) const {
+void Field::getNeighbors(std::vector<std::unique_ptr<Field>> &neigh_storage) const {
   unsigned long x_side, y_side;
   x_side = zero_position / field_size;
   y_side = zero_position % field_size;
@@ -81,7 +82,7 @@ void Field::getNeighbors(std::vector<std::shared_ptr<Field>> &neigh_storage) con
           ((i == 0 && (j == -1 || j == 1)) || (j == 0 && (i == -1 || i == 1)))) {
         std::vector<int> new_layout(layout);
         std::swap(new_layout[zero_position], new_layout[new_x_side * field_size + new_y_side]);
-        std::shared_ptr<Field> new_field = std::make_shared<Field>(Field(field_size, new_layout));
+        std::unique_ptr<Field> new_field(new Field(field_size, new_layout));
         new_field->steps_from_start = steps_from_start + 1;
         unsigned long new_pr_function = new_field->steps_from_start + new_field->hammingHeuristic();
         new_field->setPrFunction(new_pr_function);
@@ -107,10 +108,14 @@ char Field::getMove() const {
   return move;
 }
 
-std::shared_ptr<Field> Field::getParent() const {
+Field* Field::getParent() const {
   return parent;
 }
 
 int Field::getSize() {
   return field_size;
+}
+
+bool Field::operator!=(const Field& another) const {
+  return !(*this == another);
 }
