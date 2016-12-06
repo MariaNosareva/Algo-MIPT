@@ -5,8 +5,20 @@
 #ifndef PROJECT_SUFFARRAY_H
 #define PROJECT_SUFFARRAY_H
 
-class SuffArray {
+#include <string>
+#include <vector>
+#include <iostream>
 
+class SuffArray {
+ private:
+  std::string text;
+  int textLen;
+  std::vector<int> suffArray;
+  std::vector<int> LCP;
+ public:
+  SuffArray();
+  static SuffArray FromStream(std::istream&);
+  std::vector<int> MakeSuffArray();
 };
 
 #endif //PROJECT_SUFFARRAY_H
