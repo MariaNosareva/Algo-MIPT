@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include <fstream>
-#include "../GraphLib/GraphForFloyd.h"
-
+#include "../C_GraphLib/GraphForFloyd.h"
 
 TEST(GraphTest, FirstInputTest) {
   std::stringstream in;

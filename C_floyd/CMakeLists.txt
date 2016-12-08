@@ -8,6 +8,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(BUILD_GTEST ON)
 
 
-add_subdirectory(Tests)
-add_subdirectory(Main)
-add_subdirectory(GraphLib)
+add_subdirectory(C_Tests)
+add_subdirectory(C_Main)
+add_subdirectory(C_GraphLib)
