@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-add_executable(Tests tests.cpp)
+add_executable(A_Tests tests.cpp)
 
 # Locate GTest
 find_package(GTest REQUIRED)
@@ -7,5 +7,5 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-target_link_libraries(Tests ${GTEST_LIBRARIES} pthread)
-target_link_libraries(Tests GraphLib)
+target_link_libraries(A_Tests ${GTEST_LIBRARIES} pthread)
+target_link_libraries(A_Tests GraphLib)

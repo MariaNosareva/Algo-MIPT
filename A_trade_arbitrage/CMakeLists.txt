@@ -7,6 +7,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 set(BUILD_GTEST ON)
 
-add_subdirectory(Tests)
-add_subdirectory(Main)
+add_subdirectory(A_Tests)
+add_subdirectory(A_Main)
 add_subdirectory(GraphLib)
