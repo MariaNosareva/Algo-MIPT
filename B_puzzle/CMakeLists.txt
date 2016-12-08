@@ -8,6 +8,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(BUILD_GTEST ON)
 
 
-add_subdirectory(Tests)
-add_subdirectory(Main)
+add_subdirectory(B_Tests)
+add_subdirectory(B_Main)
 add_subdirectory(SolverLib)

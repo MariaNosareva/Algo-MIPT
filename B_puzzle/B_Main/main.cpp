@@ -15,11 +15,11 @@ int main() {
   fin.close();
 
   PuzzleSolver solver(field_size, game_field);
-  solver.SolveIt();
-  std::string solution = solver.get_solution();
+  solver.solveIt();
+  std::string solution = solver.getSolution();
   std::ofstream fout("puzzle.out");
   if (solution != "-1")
-    std::cout << solver.get_moves() << std::endl;
+    std::cout << solver.getMoves() << std::endl;
   std::cout << solution << std::endl;
   fout.close();
   return 0;
