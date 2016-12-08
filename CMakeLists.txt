@@ -1,1 +1,4 @@
+cmake_minimum_required(VERSION 3.5)
+add_subdirectory(A_trade_arbitrage)
+add_subdirectory(B_puzzle)
 add_subdirectory(C_floyd)
