@@ -1,0 +1,1 @@
+add_library(GraphLib GraphForFloyd.cpp)
