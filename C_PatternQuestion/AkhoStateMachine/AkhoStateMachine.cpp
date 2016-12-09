@@ -120,7 +120,8 @@ std::vector<int> AkhoStateMachine::process() {
         for (int index = 0; index < nodes[temp].indicesOfSubpattern.size(); index++) {
           int startIndex = pos - ends[nodes[temp].indicesOfSubpattern[index]] +
               starts[nodes[temp].indicesOfSubpattern[index]];
-          if (startIndex - starts[nodes[temp].indicesOfSubpattern[index]] >= 0) {
+          if ((startIndex - starts[nodes[temp].indicesOfSubpattern[index]] >= 0) &&
+              (startIndex - starts[nodes[temp].indicesOfSubpattern[index]] + pattern.length() - 1 < text.length())) {
             ++enters[startIndex - starts[nodes[temp].indicesOfSubpattern[index]]];
           }
         }
