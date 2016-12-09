@@ -137,3 +137,7 @@ std::vector<int> AkhoStateMachine::process() {
   }
   return answer;
 }
+
+int AkhoStateMachine::getFSMStates() {
+  return (int) nodes.size();
+}

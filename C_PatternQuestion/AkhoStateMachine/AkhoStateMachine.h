@@ -33,6 +33,7 @@ class AkhoStateMachine {
   int getSuffLink(int);
   int getLink(int, char);
   std::vector<int> process();
+  int getFSMStates();
 };
 
 #endif //PROJECT_AKHOSTATEMACHINE_H
