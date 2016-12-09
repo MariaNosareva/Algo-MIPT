@@ -7,7 +7,6 @@
 #include "Network.h"
 
 Network::Network(long numberOfVertices):
-    capacityMatrix(numberOfVertices + 1, std::vector<long>(numberOfVertices + 1, 0)),
     residualNetwork(numberOfVertices + 1, std::vector<long>(numberOfVertices + 1, 0)){}
 
 Network Network::FromStream(std::istream& input) {
@@ -29,15 +28,10 @@ Network Network::FromStream(std::istream& input) {
     long from, to, capacity;
     input >> from >> to >> capacity;
 
-    network.capacityMatrix[from][to] += capacity;
-    network.capacityMatrix[to][from] += capacity;
+    network.residualNetwork[from][to] += capacity;
+    network.residualNetwork[to][from] += capacity;
   }
 
-  for (int vertex1 = 1; vertex1 <=numberOfVertices; vertex1++) {
-    for (int vertex2 = 1; vertex2 <=numberOfVertices; vertex2++) {
-      network.residualNetwork[vertex1][vertex2] = network.capacityMatrix[vertex1][vertex2];
-    }
-  }
   return network;
 }
 
@@ -50,11 +44,12 @@ bool Network::BFS(std::vector<long>& parents) {
   visited[source] = true;
   parents[source] = -1;
 
+  long current = -1;
   while (!verticesQueue.empty() && !visited[drain]) {
-    long current = verticesQueue.front();
+    current = verticesQueue.front();
     verticesQueue.pop();
 
-    for (long vertex = 1; vertex <= networkSize; vertex++) {
+    for (long vertex = 0; vertex < networkSize; vertex++) {
       if (visited[vertex] == false && residualNetwork[current][vertex] > 0) {
         verticesQueue.push(vertex);
         parents[vertex] = current;
@@ -86,15 +81,11 @@ long Network::MaxFlow() {
       residualNetwork[anotherVertex][vertex] -= minPathFlow;
       residualNetwork[vertex][anotherVertex] += minPathFlow;
     }
-
-    for (long vertex = 1; vertex <= networkSize; vertex++) {
-      parents[vertex] = 0;
-    }
   }
 
   return maxFlow;
 }
 
 long Network::getNumberOfVertices() {
-  return capacityMatrix.size();
+  return residualNetwork.size();
 }

@@ -11,7 +11,6 @@
 
 class Network {
  private:
-  std::vector<std::vector<long>> capacityMatrix;
   std::vector<std::vector<long>> residualNetwork;
   long source;
   long drain;

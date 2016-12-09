@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 3.6)
-add_executable(Main main.cpp)
+add_executable(FlowMain main.cpp)
 
-target_link_libraries(Main NetworkLib)
+target_link_libraries(FlowMain NetworkLib)
