@@ -4,8 +4,10 @@
 
 #include "DSU.h"
 
-DSU::DSU(unsigned long number_of_elements): parents(number_of_elements + 1), heights(number_of_elements + 1, 1) {
-  for (int i = 0; i < number_of_elements; i++) {
+DSU::DSU(unsigned long number_of_elements):
+    parents(number_of_elements + 1),
+    heights(number_of_elements + 1, 1) {
+  for (int i = 0; i < number_of_elements; ++i) {
     parents[i] = i;
   }
 }
