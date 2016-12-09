@@ -6,8 +6,15 @@
 #include <queue>
 #include "Network.h"
 
-Network::Network(): numberOfVertices(2), numberOfEdges(0), source(0), drain(1), edgesMatrix(3000),
-                    questionsInfo(2, std::vector<int>(3000, -1)), numberOfQuestion(3000, {-1, -1}){
+Network::Network(): numberOfVertices(2),
+                    numberOfEdges(0),
+                    source(0),
+                    drain(1),
+                    edgesMatrix(3000),
+                    questionsInfo(2, std::vector<int>(3000, -1)),
+                    numberOfQuestion(3000, {-1, -1}),
+                    pattern(""),
+                    str(""){
   numberOfQuestion[0] = {2, 2};
   numberOfQuestion[1] = {2, 2};
 }
