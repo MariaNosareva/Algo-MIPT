@@ -26,7 +26,7 @@ struct Node {
 };
 
 class Treap {
- public:
+ private:
   std::shared_ptr<Node> root;
   int size;
   std::shared_ptr<Node> Merge(std::shared_ptr<Node>, std::shared_ptr<Node>);
