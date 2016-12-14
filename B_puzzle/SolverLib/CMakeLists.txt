@@ -1,0 +1,1 @@
+add_library(SolverLib Field.cpp PuzzleSolver.cpp)
