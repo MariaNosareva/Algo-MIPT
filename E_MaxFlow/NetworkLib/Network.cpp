@@ -3,7 +3,7 @@
 //
 
 #include <queue>
-#include <climits>
+#include <limits>
 #include "Network.h"
 
 Network::Network(long numberOfVertices):
@@ -67,7 +67,7 @@ long Network::MaxFlow() {
   std::vector<long> parents(networkSize + 1);
 
   while (BFS(parents)) {
-    long minPathFlow = LONG_MAX;
+    long minPathFlow = std::numeric_limits<long>::max();
 
     for (long vertex = drain; vertex != source; vertex = parents[vertex]) {
       long anotherVertex = parents[vertex];

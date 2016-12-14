@@ -14,9 +14,9 @@ class Network {
   std::vector<std::vector<long>> residualNetwork;
   long source;
   long drain;
+  explicit Network(long);
 
  public:
-  explicit Network(long);
   static Network FromStream(std::istream&);
   long getNumberOfVertices();
   bool BFS(std::vector<long>&);
