@@ -52,7 +52,6 @@ TEST(HammingTest, Fourth) {
   ASSERT_EQ("00100", net.GetPattern());
   ASSERT_EQ("0001001", net.GetString());
 }
-//TODO more tests
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
