@@ -8,6 +8,13 @@
 
 PrefixFunc::PrefixFunc(): zFunction(0), prFunction(0), String("") {}
 
+PrefixFunc PrefixFunc::PrFromStream(std::istream& in) {
+  return FromStream(in, 'p');
+}
+
+PrefixFunc PrefixFunc::ZFromStream(std::istream& in) {
+  return FromStream(in, 'z');
+}
 
 PrefixFunc PrefixFunc::FromStream(std::istream &in, char character) {
   PrefixFunc prF;
@@ -30,7 +37,7 @@ PrefixFunc PrefixFunc::FromStream(std::istream &in, char character) {
 }
 
 void PrefixFunc::FromZToP() {
-  prFunction = std::vector<int>(zFunction.size(), 0);
+  prFunction.resize(zFunction.size(), 0);
 
   for (int index = 1; index < prFunction.size(); index++) {
     if (zFunction[index]) {
@@ -55,6 +62,7 @@ void PrefixFunc::MakeString() {
           for (int pos = 0; pos < i + 1; pos++) {
             if (String[pos] != String[position - 1 - i + pos]) {
               prefixEqualsToSuffix = false;
+              break;
             }
           }
 
