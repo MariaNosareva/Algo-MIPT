@@ -1,2 +1,7 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
+add_subdirectory(A_trade_arbitrage)
+add_subdirectory(B_puzzle)
+add_subdirectory(C_floyd)
+add_subdirectory(F_Hamming)
+add_subdirectory(A_patternInString)
 add_subdirectory(B1_StringByPrefixFunc)
