@@ -56,19 +56,10 @@ void PrefixFunc::MakeString() {
       if (prFunction[position - 1] != 0) {
         std::set<char> illegal;
 
-        for (int i = prFunction[position - 1] - 1; i > -1; i--) {
-          bool prefixEqualsToSuffix = true;
-
-          for (int pos = 0; pos < i + 1; pos++) {
-            if (String[pos] != String[position - 1 - i + pos]) {
-              prefixEqualsToSuffix = false;
-              break;
-            }
-          }
-
-          if (prefixEqualsToSuffix) {
-            illegal.insert(String[i + 1]);
-          }
+        int length = prFunction[position - 1];
+        while (length > 0) {
+          illegal.insert(String[length]);
+          length = prFunction[length - 1];
         }
 
         for (char character = 'b'; character <= 'z'; character++) {
