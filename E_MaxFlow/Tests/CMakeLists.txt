@@ -8,4 +8,4 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 target_link_libraries(FlowTests ${GTEST_LIBRARIES} pthread)
-target_link_libraries(FlowTests NetworkLib)
+target_link_libraries(FlowTests NetworkLibMaxFlow)
