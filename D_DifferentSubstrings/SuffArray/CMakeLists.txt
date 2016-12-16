@@ -1,2 +1,2 @@
 cmake_minimum_required(VERSION 3.6)
-add_library(SuffArray SuffArray.cpp)
+add_library(SuffArrayD SuffArray.cpp)
